@@ -1,8 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PelangganController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\ServisController;
+use App\Http\Controllers\MekanikController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +19,9 @@ Route::middleware('auth')->group(function () {
 
     // CRUD Pelanggan
     Route::resource('pelanggan', PelangganController::class);
+    Route::resource('kendaraan', KendaraanController::class);
+    Route::resource('servis', ServisController::class);
+    Route::resource('mekanik', MekanikController::class);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

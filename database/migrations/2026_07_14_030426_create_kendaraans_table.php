@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('kendaraans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pelanggan_id')->constrained('pelanggans')->cascadeOnDelete();
-            $table->string('merk', 50);
-            $table->string('tipe', 50);
-            $table->string('plat_nomor', 20)->unique();
-            $table->year('tahun');
-            $table->string('warna', 30);
+
+            $table->foreignId('pelanggan_id')
+                  ->constrained()
+                  ->cascadeOnDelete();
+
+            $table->string('no_polisi');
+            $table->string('merk');
+            $table->string('tipe');
+            $table->integer('tahun');
+
             $table->timestamps();
         });
     }
