@@ -15,13 +15,21 @@ class Servis extends Model
         'status',
     ];
 
+
     public function kendaraan()
     {
         return $this->belongsTo(Kendaraan::class);
     }
 
+
     public function mekanik()
     {
         return $this->belongsTo(Mekanik::class);
+    }
+
+
+    public function detailSpareparts()
+    {
+        return $this->hasMany(DetailSparepart::class);
     }
 }

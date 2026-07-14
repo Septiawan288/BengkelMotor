@@ -1,32 +1,68 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\ServisController;
 use App\Http\Controllers\MekanikController;
+use App\Http\Controllers\SparepartController;
+use App\Http\Controllers\DetailSparepartController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\LaporanController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
 Route::middleware('auth')->group(function () {
 
-    // CRUD Pelanggan
+
+    // CRUD Data Bengkel
+
     Route::resource('pelanggan', PelangganController::class);
+
     Route::resource('kendaraan', KendaraanController::class);
+
     Route::resource('servis', ServisController::class);
+
     Route::resource('mekanik', MekanikController::class);
 
+    Route::resource('sparepart', SparepartController::class);
+
+    Route::resource('detail-sparepart', DetailSparepartController::class);
+
+    Route::resource('pembayaran', PembayaranController::class);
+
+
+
+    // Laporan Bengkel
+
+    Route::get('/laporan', [LaporanController::class, 'index']);
+
+
+
     // Profile
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
+
 });
+
 
 require __DIR__.'/auth.php';
